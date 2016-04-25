@@ -23,8 +23,8 @@ public class ProgressController extends HttpServlet
 
 		String data = req.getAttribute("data").toString();
 		PrintWriter out = resp.getWriter();  
-        out.println(data);  
-        out.flush();  
+        out.print(data);
+        out.flush();
         out.close(); 
 	}
 

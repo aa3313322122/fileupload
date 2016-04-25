@@ -12,6 +12,7 @@ public class DateUtil {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 	
 	public static void main(String[] args) {
+		System.out.println(System.getProperty("user.dir"));
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		Date date = new Date();
 		System.out.println(dateToString(date));

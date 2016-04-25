@@ -5,16 +5,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>index</title>
-<script type="text/javascript" src="./js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="./js/jquery-1.8.2.js"></script>
 <script type="text/javascript">
 
 	var i = 1;
+	var percent = 0;
 	function ajaxFileUpload()
 	{
 		var file = document.getElementById("file1").files[0];
 		var data = new FormData();
 	    data.append('file1', file);
+	    if(percent < 100)
+    	{
+	    	self.setInterval("getP()",1000);
+    	}
 	    
 		$.ajax({url:"upload.action",
 			processData: false,
@@ -24,32 +28,22 @@
 			type:"POST",
 			data:data
 		});
-		
-	
 	}
 	
-	function getPro()
-	{
-		var int=self.setInterval("progress()",1000)
-		function progress()
-		  {
-		  	getP();
-		  }
-	}
 	function getP()
 	  {
 		$.ajax({
 			url:"progress.action",
 			type:"GET",
 			cache: false,
-			async:false,
+			async:true,
 			dataType: "text",
 			success:function (data)
 			{
 				document.getElementById("pro").value = data;
+				percent = data;
 			}
 		})
-		
 	  }
 	
 		  //获取进度信息
@@ -73,21 +67,16 @@
         document.getElementById('form').appendChild(progress);
 
     }
-      
-
 </script>
 
 </head>
 <body>
+index2
 <button onclick="add()">增加</button>
 <form id="form" method="POST" enctype="multipart/form-data" >
  <input type="button"  value="Upload"><br/><br/>
   <input type="file" multiple="multiple" onchange="ajaxFileUpload()" id="file1" name="file1">&nbsp;
   <progress id="pro" value="0" max="100" > </progress> 
 </form>
-
-
-
-
 </body>
 </html>
